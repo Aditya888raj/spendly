@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Spendly</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/theme.js"></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">Spendly</div>
+    <div class="nav-links">
+      <span class="greeting" id="greeting"></span>
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="expenses.html">Expenses</a>
+      <a href="settings.html">Settings</a>
+      <button id="logoutBtn" class="btn btn-small btn-outline">Logout</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h1 class="page-title">Dashboard</h1>
+
+    <!-- Summary cards -->
+    <section class="summary-grid">
+      <div class="card summary-card card-total">
+        <span class="stat-icon">💰</span>
+        <div class="label">Total spending</div>
+        <div class="value" id="totalSpending">₹0</div>
+      </div>
+      <div class="card summary-card card-month">
+        <span class="stat-icon">📅</span>
+        <div class="label">This month</div>
+        <div class="value" id="monthSpending">₹0</div>
+      </div>
+      <div class="card summary-card card-budget">
+        <span class="stat-icon">🎯</span>
+        <div class="label">Budget remaining</div>
+        <div class="value" id="budgetRemaining">₹0</div>
+      </div>
+    </section>
+
+    <!-- Budget + category chart -->
+    <section class="two-col" style="margin-bottom: 24px;">
+      <div class="card">
+        <h2>Monthly budget</h2>
+        <div class="budget-text" id="budgetText"></div>
+        <div class="progress">
+          <div class="progress-bar" id="budgetBar"></div>
+        </div>
+        <div class="budget-text" id="budgetPercent"></div>
+
+        <form id="budgetForm" class="budget-form">
+          <input type="number" id="budgetInput" min="0" step="1" placeholder="Set monthly budget (₹)" required />
+          <button type="submit" class="btn btn-small">Save</button>
+        </form>
+        <div class="budget-text" id="budgetMsg"></div>
+
+        <!-- NEW: mini stats -->
+        <div class="mini-stats">
+          <div>
+            <span class="mini-label">Daily average</span>
+            <strong id="dailyAvg">₹0</strong>
+          </div>
+          <div>
+            <span class="mini-label">Days left</span>
+            <strong id="daysLeft">0</strong>
+          </div>
+          <div>
+            <span class="mini-label">Safe to spend / day</span>
+            <strong id="safePerDay">—</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Spending by category</h2>
+        <p id="categoryEmpty" class="empty">No spending this month.</p>
+        <div id="chartBox" class="chart-box">
+          <canvas id="categoryChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent expenses -->
+    <section class="card">
+      <h2>Recent expenses</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Date</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody id="expenseBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
